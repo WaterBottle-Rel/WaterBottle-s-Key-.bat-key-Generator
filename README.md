@@ -1,2 +1,2 @@
-# WaterBottle-s-Key-.bat-key-Generator
+# WaterBottlesBatKeyGenerator
 This is a key generator made in batch code.
