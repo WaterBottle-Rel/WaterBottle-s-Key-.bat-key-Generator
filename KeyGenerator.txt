@@ -1,0 +1,42 @@
+@echo off
+mode con: cols=120 lines=40
+color 01
+setlocal EnableDelayedExpansion
+
+echo ================================================================
+echo                 WATERBOTTLE'S KEY GENERATOR
+echo ================================================================
+
+set "keyFolder=%~dp0WATER1111111111IsProbablyAkey"
+set "keyFile=%keyFolder%\used.txt"
+
+if exist "%keyFile%" (
+    echo You Can Only Generate 1 Key.
+    echo Your Key:
+    type "%keyFile%"
+    goto end
+)
+
+if not exist "%keyFolder%" (
+    mkdir "%keyFolder%"
+)
+
+set "alphabet=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+set "password=WATER"
+
+for /L %%i in (1,1,9) do (
+    set /a rand=!random! %% 52
+    :: Now get the character using delayed expansion of rand:
+    call set "char=%%alphabet:~!rand!,1%%"
+    set "password=!password!!char!"
+)
+
+echo.
+echo Your one-time key: [%password%]
+echo.
+echo %password% > "%keyFile%"
+attrib +r +h +s "%keyFile%" >nul 2>&1
+
+:end
+pause
+exit /b
